@@ -5,6 +5,7 @@ date: '2017-10-09 16:25:06 -0700'
 comments: true
 published: true
 ---
+<head><link rel="image_src" href="https://d3nmt5vlzunoa1.cloudfront.net/phpstorm/files/2015/10/large_v-trans.png"></head>
    I was tasked with performing a penetration testing on a server which hosted multiple websites and services. Most of these services ran on _Docker containers_, and in this article, I'm going to show how could an overlooked misconfiguration lead to a complete takeover of the host system.
 <!--break-->
 
@@ -12,8 +13,6 @@ published: true
 
 
 ## **What is Docker?**
-
-<img src="https://d3nmt5vlzunoa1.cloudfront.net/phpstorm/files/2015/10/large_v-trans.png" width="457" height="409"/>
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software)):
 
