@@ -11,7 +11,7 @@ published: true
 **Disclaimer:** This article was written for educational purposes, and the author is not responsible for any misuse of any of the tools or techniques demonstrated in the article.
 
 
-<br><br>
+<br>
 ## **What is Docker?**
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software)):
@@ -20,6 +20,7 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software)):
 
 
 <br><br>## **Information Gathering**
+
 Initial reconnaissance showed an open port that was apparently serving some sort of an API that supports JSON objects. Default response for any unknown requests was a JSON object like this:
 
 	{"message":"page not found"}
@@ -36,8 +37,9 @@ To enumerate the version of the API, we simply appended `v1.30/info` to the URL 
 `{"message":"client is newer than server (client API version: 1.30, server API version: 1.24)"}`
 
 
-<br><br>
+<br>
 ## **Gaining Access to a Container**
+
 After some quick reading through the [Docker API Documentation](https://docs.docker.com/engine/api/v1.24/), creating a custom image and starting it as a container is simply a matter of a few POST requests.
 
 Since Docker allows us to create an image from a _Dockerfile_ through the UNIX socket, it shouldn't be different if performed through the API, right?
@@ -151,8 +153,9 @@ And we should be receiving a new connection with a root reverse shell. Hurraaay!
 **Don't cheer up just yet, because we're still confined to the container.**
 
 
-<br><br>
+<br>
 ## **Escalating to the Host's Root**
+
 Now, to the fun part! As mentioned above, we _mapped_ the host's root directory to a directory inside the container, which we called "hostroot". So, by simply nagivating to this directory, we are able to view the entire filesystem of the **host**.
 
 `cd /root/hostroot`
@@ -178,8 +181,9 @@ To remove current keys and add your own:
 Finally, just run SSH and login using your new password/public key.
 
 
-<br><br>
+<br>
 ## **How Could This Have Been Prevented?**
+
 I'm going to list the mistakes and misconfugiration problems which led to this awkward situation(at least it was for the developer of course).
 
 - **Unprotected API**
@@ -198,7 +202,7 @@ Being one of the suggested OWASP's top 10 most critical web application security
 
 
 
-<br><br>
+<br>
 Do you think that more countermeasures could've been taken to prevent what happened? Let me know in the comments below!
 
 <br>
