@@ -170,7 +170,8 @@ Anyhow, to be able to login as root, you can do one of two things(among many oth
 
 - Add your own public key into `/root/.ssh/authorized_keys`
 
-> Note that -for some reason- you can't write into the file and save, but you can delete it and re-create it. Be careful not to delete existing public keys while pentesting. Save the current keys into a file and restore it in the clean-up phase.
+Note
+> For some reason, you can't write into the file and save, but you can delete it and re-create it. Be careful not to delete existing public keys while pentesting. Save the current keys into a file and restore it in the clean-up phase.
 
 To remove current keys and add your own:
 
