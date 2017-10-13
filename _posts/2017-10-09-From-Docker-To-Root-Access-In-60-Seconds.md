@@ -185,9 +185,9 @@ I'm going to list the mistakes and misconfugiration problems which led to this a
 
 - **Unprotected API**
 
-Being one of the suggested OWASP's top 10 most critical web application security risks for 2017, I can't stress enough how important it is for developers to follow standard security procedures and policies. The API could've been hardened further by doing two things:
- 1. Restrict access to the API by only allowing specific computers/IP address to use it.
- 2. Implement proper authorization to the API, to prevent unauthenticated attempts to abuse the API and create Docker images/containers.
+	Being one of the suggested OWASP's top 10 most critical web application security risks for 2017, I can't stress enough how important it is for developers to follow standard security procedures and policies. The API could've been hardened further by doing two things:
+ 	1. Restrict access to the API by only allowing specific computers/IP address to use it.
+ 	2. Implement proper authorization to the API, to prevent unauthenticated attempts to abuse the API and create Docker images/containers.
  
 - **SSH Root Login**
 
