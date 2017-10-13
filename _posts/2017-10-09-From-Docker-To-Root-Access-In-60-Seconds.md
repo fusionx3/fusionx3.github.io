@@ -18,10 +18,10 @@ Think of Docker as the app-based virtualization technology where you get faster 
 
 |         -         	|      Docker     	|       Hypervisor(VM)      |
 |:-----------------:	|:---------------:	|:---------------------:	|
-| Overhead/Hardware 	|     Minimal     	|          High         	|
+| Overhead/Hardware Usage 	|     Minimal     	|          High         	|
 | Performance       	|       High      	|         Lower         	|
 | Boot time         	|       Fast      	|         Slower        	|
-| Isolation         	| Sharing same OS 	| Independent resources 	|
+| Isolation         	| A layer over the host OS 	| Independent resources 	|
 
 You can find a detailed definition on [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software)).
 
