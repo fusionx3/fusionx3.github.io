@@ -21,7 +21,7 @@ Think of Docker as the app-based virtualization technology where you get faster 
 | Overhead/Hardware Usage 	|			Minimal			|			High			|
 | Performance       		|			High			|			Lower			|
 | Boot time         		|			Fast			|			Slower        	|
-| Isolation         		| A layer over the host OS 	|	Independent resources 	|
+| Isolation         		| A layer over the host OS 	|			Isolated		|
 
 <br>
 You can find more details in [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software)).
