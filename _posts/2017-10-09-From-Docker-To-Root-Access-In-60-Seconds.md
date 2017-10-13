@@ -19,7 +19,7 @@ Initial reconnaissance showed an open port that was apparently serving some sort
 
 By appending `/info` to the URL of the service to be like this: `http://10.0.5.10:4000/info`, we were able to view further information about the Docker service behind the API:
 
-![Information about the Docker Daemon]({{site.baseurl}}/https://raw.githubusercontent.com/fusionx3/fusionx3.github.io/master/images/docker_1.png)
+![Information about the Docker Daemon]({{ "/images/docker_1.png" | absolute_url }})
 
 
 So, the system administrator hasn't restricted access to the Docker API (A big mistake), and apparently, since the Docker daemon runs as a privileged user, I doubt that the system administration bothered
@@ -31,10 +31,7 @@ To enumerate the version of the API, we simply appended `v1.30/info` to the URL 
 ## **Gaining access to a container**
 After some quick reading through the [Docker API Documentation](https://docs.docker.com/engine/api/v1.24/), creating a custom image and starting it as a container is simply a matter of a few POST requests.
 
-Since Docker allows us to create an image from a Docker file, it shouldn't be too different if performed through the API, right?
-
-
-
+Since Docker allows us to create an image from a Docker file, it shouldn't be too different if performed through the API, right? 
 
 
 
