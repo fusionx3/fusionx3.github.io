@@ -10,7 +10,7 @@ url: https://fusionx3.github.io
 # be the project name.
 # *** IMPORTANT: If your local "jekyll serve" throws errors change this to '' or
 #     run it like so: jekyll serve --baseurl=''
-baseurl: /fusionx3.github.io
+baseurl: /
 
 # This can be '' to hide the Github nav button
 github: 'fusionx3/fusionx3.github.io'
