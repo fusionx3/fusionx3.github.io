@@ -199,7 +199,7 @@ I'm going to list the mistakes and misconfugiration problems which led to this a
 
 - **Insufficient OS Protection**
 
-	Furthermore, the system administration should integrate Kernel hardening modules such as [SELinux](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html/container_security_guide/docker_selinux_security_policy) or [AppArmor](https://docs.docker.com/engine/security/apparmor/). This could've helped in preventing me from accessing the file system on the host _**even if I had read/write permissions on all directories and files**_.
+	Furthermore, the System Administrator should integrate Kernel hardening modules such as [SELinux](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html/container_security_guide/docker_selinux_security_policy) or [AppArmor](https://docs.docker.com/engine/security/apparmor/). This could've helped in preventing me from accessing the file system on the host _**even if I had read/write permissions on all directories and files**_.
 
 
 
