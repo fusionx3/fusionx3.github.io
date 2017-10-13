@@ -19,7 +19,7 @@ Initial reconnaissance showed an open port that was apparently serving some sort
 
 By appending `/info` to the URL of the service to be like this: `http://10.0.5.10:4000/info`, we were able to view further information about the Docker service behind the API:
 
-![Information about the Docker Daemon]({{ "/images/docker_1.png" | absolute_url }})
+![Information about the Docker Daemon]({{ "https://raw.githubusercontent.com/fusionx3/fusionx3.github.io/master/images/docker_1.png" | absolute_url }})
 
 
 So, the system administrator hasn't restricted access to the Docker API (A big mistake), and apparently, since the Docker daemon runs as a privileged user, I doubt that the system administration bothered
