@@ -1,7 +1,7 @@
 # Jekyll configuration
 
 name: TCPJunkie
-description: A Pentester's Blog, where you will find numerous topics concerning information security and hacking.
+description: A Pentester's Blog, where you will find numerous topics concerning information security and hacking.\nTest
 
 # url is currently only used only for the RSS feed in feed.xml
 url: http://tcpjunkie.com
