@@ -31,7 +31,7 @@ In order to create a Docker container, you need to build an image first. You can
 <br>
 ## **Information Gathering**
 
-Initial reconnaissance showed an open port that was apparently serving some sort of an API that supports JSON objects. Default response for any unknown requests was a JSON object like this:
+Initial reconnaissance showed an open port that was apparently serving some sort of an API that supports JSON objects. Default response for the initial GET request was as the following:
 
 	{"message":"page not found"}
 
@@ -42,7 +42,7 @@ By appending `/info` to the URL of the service to be like this: `http://10.0.5.1
 
 So, the system administrator hasn't restricted access to the Docker API (A big mistake), and apparently, since the Docker daemon runs as a privileged user, I doubt that the system administration bothered
 
-To enumerate the version of the API, we appended `v1.30/info` to the URL and the API explicitly told us its version. v1.30 is the latest version of the API at the time of writing this article, and according to the documentation, you can query
+To enumerate the version of the API, we appended `v1.30/info` to the URL and the API explicitly told us its version. v1.30 is the latest version of the API at the time of writing this article, and according to the documentation, you can also query the server's info by a GET request to this URL: `http://10.0.5.10:4000/v1.30/info`
 
 `{"message":"client is newer than server (client API version: 1.30, server API version: 1.24)"}`
 
