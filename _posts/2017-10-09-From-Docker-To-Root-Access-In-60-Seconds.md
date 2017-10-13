@@ -5,14 +5,15 @@ date: '2017-10-09 16:25:06 -0700'
 comments: true
 published: true
 ---
-I was tasked with performing a penetration testing on a server which hosted multiple websites and services. Most of these services ran on _Docker containers_, and in this article, I'm going to show how could an overlooked misconfiguration lead to a complete takeover of the **host** system.
+   I was tasked with performing a penetration testing on a server which hosted multiple websites and services. Most of these services ran on _Docker containers_, and in this article, I'm going to show how could an overlooked misconfiguration lead to a complete takeover of the **host** system.
 <!--break-->
+
 **Disclaimer:** This article was written for educational purposes, and the author is not responsible for any misuse of any of the tools or techniques demonstrated in the article.
 
 
 ## **What is Docker?**
-
-
+From Wikipedia:
+> Docker is a software technology providing containers, promoted by the company Docker, Inc. Docker provides an additional layer of abstraction and automation of operating-system-level virtualization on Windows and Linux. Docker uses the resource isolation features of the Linux kernel such as cgroups and kernel namespaces, and a union-capable file system such as OverlayFS and others to allow independent "containers" to run within a single Linux instance, avoiding the overhead of starting and maintaining virtual machines (VMs).
 
 ## **Information Gathering**
 Initial reconnaissance showed an open port that was apparently serving some sort of an API that supports JSON objects. Default response for any unknown requests was a JSON object like this:
@@ -184,9 +185,13 @@ Being one of the suggested OWASP's top 10 most critical web application security
 
 	You should never allow SSH root login, period
 
-- Insufficient OS Protection
+- **Insufficient OS Protection**
+
+	Furthermore, the system administration should integrate Kernel hardening modules such as [SELinux](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html/container_security_guide/docker_selinux_security_policy) or [AppArmor](https://docs.docker.com/engine/security/apparmor/). This could've helped in preventing me from accessing the file system on the host _**even if I had read/write permissions on all directories and files**_.
 
 
 
+Do you think that more countermeasures could've been taken to prevent what happened? Let me know in the comments below!
 
 
+**Cheers**
