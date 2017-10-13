@@ -5,14 +5,14 @@ date: '2017-10-09 16:25:06 -0700'
 comments: true
 published: true
 ---
-<head><link rel="image_src" href="https://d3nmt5vlzunoa1.cloudfront.net/phpstorm/files/2015/10/large_v-trans.png"></head>
    I was tasked with performing a penetration testing on a server which hosted multiple websites and services. Most of these services ran on _Docker containers_, and in this article, I'm going to show how could an overlooked misconfiguration lead to a complete takeover of the host system.
 <!--break-->
 
 **Disclaimer:** This article was written for educational purposes, and the author is not responsible for any misuse of any of the tools or techniques demonstrated in the article.
 
 
-<br><br>## **What is Docker?**
+<br><br>
+## **What is Docker?**
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software)):
 
@@ -36,7 +36,8 @@ To enumerate the version of the API, we simply appended `v1.30/info` to the URL 
 `{"message":"client is newer than server (client API version: 1.30, server API version: 1.24)"}`
 
 
-<br><br>## **Gaining Access to a Container**
+<br><br>
+## **Gaining Access to a Container**
 After some quick reading through the [Docker API Documentation](https://docs.docker.com/engine/api/v1.24/), creating a custom image and starting it as a container is simply a matter of a few POST requests.
 
 Since Docker allows us to create an image from a _Dockerfile_ through the UNIX socket, it shouldn't be different if performed through the API, right?
@@ -150,7 +151,8 @@ And we should be receiving a new connection with a root reverse shell. Hurraaay!
 **Don't cheer up just yet, because we're still confined to the container.**
 
 
-<br><br>## **Escalating to the Host's Root**
+<br><br>
+## **Escalating to the Host's Root**
 Now, to the fun part! As mentioned above, we _mapped_ the host's root directory to a directory inside the container, which we called "hostroot". So, by simply nagivating to this directory, we are able to view the entire filesystem of the **host**.
 
 `cd /root/hostroot`
@@ -176,7 +178,8 @@ To remove current keys and add your own:
 Finally, just run SSH and login using your new password/public key.
 
 
-<br><br>## **How Could This Have Been Prevented?**
+<br><br>
+## **How Could This Have Been Prevented?**
 I'm going to list the mistakes and misconfugiration problems which led to this awkward situation(at least it was for the developer of course).
 
 - **Unprotected API**
@@ -195,7 +198,8 @@ Being one of the suggested OWASP's top 10 most critical web application security
 
 
 
-<br><br>Do you think that more countermeasures could've been taken to prevent what happened? Let me know in the comments below!
-<br>
+<br><br>
+Do you think that more countermeasures could've been taken to prevent what happened? Let me know in the comments below!
 
+<br>
 **Cheers**
