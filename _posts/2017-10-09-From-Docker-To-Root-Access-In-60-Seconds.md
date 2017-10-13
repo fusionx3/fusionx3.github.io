@@ -150,7 +150,7 @@ Now, to the fun part! As mentioned above, we _mapped_ the host's root directory 
 
 `cd /root/hostroot`
 
-For more convenience and to avoid getting confused and accidently browse files on the container rather than the host, we can simply use _chroot_ to change the current root directory:
+For more convenience and to avoid getting confused and accidentally browse files on the container rather than the host, we can use _chroot_ command to change the current root directory:
 
 `chroot /root/roothost`
 
@@ -164,5 +164,29 @@ Anyhow, to be able to login as root, you can do one of two things(among many oth
 
 > Note that -for some reason- you can't write into the file and save, but you can delete it and re-create it. Be careful not to delete existing public keys while pentesting. Save the current keys into a file and restore it in the clean-up phase.
 
+To remove current keys and add your own:
+
 `rm -rf /root/.ssh/authorized_keys && echo "YOUR_PUBLIC_KEY" > /root/.ssh/authorized_keys`
+
+Finally, just run SSH and login using your new password/public key.
+
+
+## **How could this have been prevented?**
+I'm going to list the mistakes and misconfugiration problems which led to this awkward situation(at least it was for the developer of course).
+
+- **Unprotected API**
+
+Being one of the suggested OWASP's top 10 most critical web application security risks for 2017, I can't stress enough how important it is for developers to follow standard security procedures and policies. The API could've been hardened further by doing two things:
+ 1. Restrict access to the API by only allowing specific computers/IP address to use it.
+ 2. Implement proper authorization to the API, to prevent unauthenticated attempts to abuse the API and create Docker images/containers.
+ 
+- **SSH Root Login**
+
+	You should never allow SSH root login, period
+
+- Insufficient OS Protection
+
+
+
+
 
