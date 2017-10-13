@@ -15,28 +15,14 @@ published: true
 ## **What is Docker?**
 
 Think of Docker as the app-based virtualization technology where you get faster performance and no overhead like in a Hypervisor(OS-based). However, you get less _isolation_. Meaning, all containers share(sort of) the same host OS and could potentially affect each others. Boot time is different, because VMs need to boot a full OS. Meanwhile, a Docker container is merely an overlay and isn't as resource-independent as a Virtual Machine.
-
+<style>
 |        	 -         		|			Docker			|       Hypervisor(VM)      |
 |:-------------------------:|:-------------------------:|:-------------------------:|
 | Overhead/Hardware Usage 	|   	  Minimal   		|			High         	|
 | Performance       		|       	High      		| 			Lower         	|
 | Boot time         		|    		Fast      		|			Slower        	|
 | Isolation         		| A layer over the host OS 	|	Independent resources 	|
-
-
-|-----------------+------------+-----------------+----------------|
-| Default aligned |Left aligned| Center aligned  | Right aligned  |
-|-----------------|:-----------|:---------------:|---------------:|
-| First body part |Second cell | Third cell      | fourth cell    |
-| Second line     |foo         | **strong**      | baz            |
-| Third line      |quux        | baz             | bar            |
-|-----------------+------------+-----------------+----------------|
-| Second body     |            |                 |                |
-| 2 line          |            |                 |                |
-|=================+============+=================+================|
-| Footer row      |            |                 |                |
-|-----------------+------------+-----------------+----------------|
-
+</style>
 
 
 You can find a detailed definition on [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software)).
