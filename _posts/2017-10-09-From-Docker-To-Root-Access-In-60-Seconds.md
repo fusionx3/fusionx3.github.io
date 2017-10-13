@@ -18,8 +18,8 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software)):
 
 > Docker is a software technology providing containers, promoted by the company Docker, Inc. Docker provides an additional layer of abstraction and automation of operating-system-level virtualization on Windows and Linux. Docker uses the resource isolation features of the Linux kernel such as cgroups and kernel namespaces, and a union-capable file system such as OverlayFS and others to allow independent "containers" to run within a single Linux instance, avoiding the overhead of starting and maintaining virtual machines (VMs).
 
-
-<br><br>## **Information Gathering**
+<br>
+## **Information Gathering**
 
 Initial reconnaissance showed an open port that was apparently serving some sort of an API that supports JSON objects. Default response for any unknown requests was a JSON object like this:
 
@@ -35,7 +35,6 @@ So, the system administrator hasn't restricted access to the Docker API (A big m
 To enumerate the version of the API, we simply appended `v1.30/info` to the URL and the API explicitly told us its version:
 
 `{"message":"client is newer than server (client API version: 1.30, server API version: 1.24)"}`
-
 
 <br>
 ## **Gaining Access to a Container**
@@ -150,8 +149,7 @@ And we should be receiving a new connection with a root reverse shell. Hurraaay!
 <img src="https://github.com/fusionx3/fusionx3.github.io/blob/master/images/docker_2.png?raw=true" width="800" height="200" />
 
 
-**Don't cheer up just yet, because we're still confined to the container.**
-
+**Don't do the "root dance" just yet, because we're still confined to the container.**
 
 <br>
 ## **Escalating to the Host's Root**
@@ -179,7 +177,6 @@ To remove current keys and add your own:
 `rm -rf /root/.ssh/authorized_keys && echo "YOUR_PUBLIC_KEY" > /root/.ssh/authorized_keys`
 
 Finally, just run SSH and login using your new password/public key.
-
 
 <br>
 ## **How Could This Have Been Prevented?**
