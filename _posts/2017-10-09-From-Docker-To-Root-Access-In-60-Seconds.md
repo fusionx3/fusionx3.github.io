@@ -3,7 +3,7 @@ layout: post
 title: From Docker API To Root Access in 60 Seconds
 date: '2017-10-09 16:25:06 -0700'
 comments: true
-published: true
+published: false
 ---
    I was tasked with performing a penetration testing on a server which hosted multiple websites and services. Most of these services ran on _Docker containers_, and in this article, I'm going to show how could an overlooked misconfiguration lead to a complete takeover of the host system.
 <!--break-->
