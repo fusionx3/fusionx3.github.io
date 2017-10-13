@@ -139,10 +139,10 @@ Content-Type: application/json
 Connection: Close
 ```
 And we should be receiving a new connection with a root reverse shell. Hurraaay!
-<img src="https://github.com/fusionx3/fusionx3.github.io/blob/master/images/docker_2.png?raw=true"/>
+<img src="https://github.com/fusionx3/fusionx3.github.io/blob/master/images/docker_2.png?raw=true" width="800" height="200" />
 
 
-**Don't cheer up just yet, because we're still confined in the container.**
+**Don't cheer up just yet, because we're still confined to the container.**
 
 
 ## **Escalating to the host's root**
