@@ -4,6 +4,9 @@ body {
     font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
+.title {
+    font-size: 250%;
+}
 .copyright {
     color: #ffffff;
 }
