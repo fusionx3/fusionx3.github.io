@@ -14,7 +14,10 @@ layout: default
             {% endif %}
         {% endif %}
         <div class="content">
-            {{ post.content }}
+            {{ post.content | split:'<!--break-->' | first }}
+            {% if post.content contains '<!--break-->' %}
+            <a href="{{ post.url }}">Read more</a>
+   {% endif %}
         </div>
     </div>
 </div>
