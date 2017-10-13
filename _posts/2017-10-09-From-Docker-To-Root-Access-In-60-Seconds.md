@@ -23,6 +23,7 @@ Think of Docker as the app-based virtualization technology where you get faster 
 | Boot time         		|    		Fast      		|			Slower        	|
 | Isolation         		| A layer over the host OS 	|	Independent resources 	|
 
+
 You can find a detailed definition on [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software)).
 
 In order to create a Docker container, you need to build an image first. You can find images at [Docker Hub](https://hub.docker.com/) or you can build your own using a [_Dockerfile_](https://docs.docker.com/engine/reference/builder/). After building your image, it gets saved locally on the disk, then you can create a container based on this image and start it.
