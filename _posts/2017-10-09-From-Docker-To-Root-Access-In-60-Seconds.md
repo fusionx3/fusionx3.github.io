@@ -23,9 +23,8 @@ Think of Docker as the app-based virtualization technology where you get faster 
 | Boot time         		|			Fast			|			Slower        	|
 | Isolation         		| A layer over the host OS 	|	Independent resources 	|
 
-
-
-You can find a detailed definition on [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software)).
+<br>
+You can find more details in [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software)).
 
 In order to create a Docker container, you need to build an image first. You can find images at [Docker Hub](https://hub.docker.com/) or you can build your own using a [_Dockerfile_](https://docs.docker.com/engine/reference/builder/). After building your image, it gets saved locally on the disk, then you can create a container based on this image and start it.
 
@@ -43,9 +42,13 @@ By appending `/info` to the URL of the service to be like this: `http://10.0.5.1
 
 So, the system administrator hasn't restricted access to the Docker API (A big mistake), and apparently, since the Docker daemon runs as a privileged user, I doubt that the system administration bothered
 
-To enumerate the version of the API, we appended `v1.30/info` to the URL and the API explicitly told us its version. v1.30 is the latest version of the API at the time of writing this article, and according to the documentation, you can also query the server's info by a GET request to this URL: `http://10.0.5.10:4000/v1.30/info`
+To enumerate the version of the API, we appended `v1.30/info` to the URL and the API explicitly told us its version. v1.30 is the latest version of the API at the time of writing this article, and according to the documentation, you can also query the server's info by submitting a GET request to this URL: `http://10.0.5.10:4000/v1.30/info`
 
-`{"message":"client is newer than server (client API version: 1.30, server API version: 1.24)"}`
+```
+{
+"message":"client is newer than server (client API version: 1.30, server API version: 1.24)"
+}
+```
 
 <br>
 ## **Gaining Access to a Container**
