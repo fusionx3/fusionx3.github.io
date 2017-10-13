@@ -5,15 +5,16 @@ layout: default
 {% for post in paginator.posts %}
 <div class="article">
     <div class="well">
-        <h1><a href="{{ site.baseurl}}{{ post.url }}"> {{ post.title }}</a></h1>
+        <h1 class="title"><a href="{{ site.baseurl}}{{ post.url }}"> {{ post.title }}</a></h1>
         <p>{{ post.date | date: "%b %-d, %Y" }}</p>
-        {% if site.comments and post.comments %}
+<!--         {% if site.comments and post.comments %}
             {% if site.disqus != '' %}
             <p class="author"><a href="{{ site.baseurl }}{{ post.url }}/#disqus_thread" data-disqus-identifier="{{ post.url | slugify }}">Comments</a></p>
             {% elsif site.isso != '' %}
             <p class="author"><a href="{{ site.baseurl }}{{ post.url }}{{ site.isso_suffix }}#isso-thread">Comments</a></p>
             {% endif %}
-        {% endif %}
+        {% endif %} -->
+        <br>
         <div class="content">
             {{ post.content | split:'<!--break-->' | first }}
             {% if post.content contains '<!--break-->' %}
