@@ -12,7 +12,8 @@ published: true
 
 
 ## **What is Docker?**
-From Wikipedia:
+From [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software)):
+
 > Docker is a software technology providing containers, promoted by the company Docker, Inc. Docker provides an additional layer of abstraction and automation of operating-system-level virtualization on Windows and Linux. Docker uses the resource isolation features of the Linux kernel such as cgroups and kernel namespaces, and a union-capable file system such as OverlayFS and others to allow independent "containers" to run within a single Linux instance, avoiding the overhead of starting and maintaining virtual machines (VMs).
 
 ## **Information Gathering**
