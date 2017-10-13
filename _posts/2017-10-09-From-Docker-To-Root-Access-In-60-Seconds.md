@@ -151,6 +151,7 @@ Now, to the fun part! As mentioned above, we _mapped_ the host's root directory 
 `cd /root/hostroot`
 
 For more convenience and to avoid getting confused and accidently browse files on the container rather than the host, we can simply use _chroot_ to change the current root directory:
+
 `chroot /root/roothost`
 
 Another mistake made by the system administration was allowing root login via SSH to the host. How did we know this? through the `sshd_config` file of course!
@@ -159,5 +160,7 @@ Anyhow, to be able to login as root, you can do one of two things:
 -Change the hashed password in `/etc/shadow` directly.
 -Add your own public key into `/root/.ssh/authorized_keys`
 
-> Note that -for some reason- you can't write into the file and save, but you can delete it and re-create it).
-`asdasd`
+> Note that -for some reason- you can't write into the file and save, but you can delete it and re-create it. Be careful not to delete existing public keys while pentesting. Save the current keys into a file and restore them in the clean-up phase.
+
+`rm -rf /root/.ssh/authorized_keys && echo "YOUR_PUBLIC_KEY" > /root/.ssh/authorized_keys`
+
