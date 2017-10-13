@@ -70,7 +70,7 @@ We can confirm that our image has been created by going to this URL: http://10.0
 Next step is to create a container from this image, and according to the documentation, it could be done using the following request:
 
 `POST /containers/create HTTP/1.1
-Host: 108.61.210.185:8081
+Host: 10.0.5.10:4000
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
 Accept-Language: en-US,en;q=0.5
