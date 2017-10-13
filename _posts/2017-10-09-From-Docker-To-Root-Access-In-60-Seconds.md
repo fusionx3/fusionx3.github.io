@@ -18,6 +18,7 @@ published: true
 From [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software)):
 
 > Docker is a software technology providing containers, promoted by the company Docker, Inc. Docker provides an additional layer of abstraction and automation of operating-system-level virtualization on Windows and Linux. Docker uses the resource isolation features of the Linux kernel such as cgroups and kernel namespaces, and a union-capable file system such as OverlayFS and others to allow independent "containers" to run within a single Linux instance, avoiding the overhead of starting and maintaining virtual machines (VMs).
+<br>
 
 ## **Information Gathering**
 Initial reconnaissance showed an open port that was apparently serving some sort of an API that supports JSON objects. Default response for any unknown requests was a JSON object like this:
@@ -34,7 +35,7 @@ So, the system administrator hasn't restricted access to the Docker API (A big m
 To enumerate the version of the API, we simply appended `v1.30/info` to the URL and the API explicitly told us its version:
 
 `{"message":"client is newer than server (client API version: 1.30, server API version: 1.24)"}`
-
+<br>
 
 ## **Gaining Access to a Container**
 After some quick reading through the [Docker API Documentation](https://docs.docker.com/engine/api/v1.24/), creating a custom image and starting it as a container is simply a matter of a few POST requests.
@@ -148,7 +149,7 @@ And we should be receiving a new connection with a root reverse shell. Hurraaay!
 
 
 **Don't cheer up just yet, because we're still confined to the container.**
-
+<br>
 
 ## **Escalating to the Host's Root**
 Now, to the fun part! As mentioned above, we _mapped_ the host's root directory to a directory inside the container, which we called "hostroot". So, by simply nagivating to this directory, we are able to view the entire filesystem of the **host**.
@@ -174,7 +175,7 @@ To remove current keys and add your own:
 `rm -rf /root/.ssh/authorized_keys && echo "YOUR_PUBLIC_KEY" > /root/.ssh/authorized_keys`
 
 Finally, just run SSH and login using your new password/public key.
-
+<br>
 
 ## **How Could This Have Been Prevented?**
 I'm going to list the mistakes and misconfugiration problems which led to this awkward situation(at least it was for the developer of course).
@@ -192,10 +193,10 @@ Being one of the suggested OWASP's top 10 most critical web application security
 - **Insufficient OS Protection**
 
 	Furthermore, the system administration should integrate Kernel hardening modules such as [SELinux](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html/container_security_guide/docker_selinux_security_policy) or [AppArmor](https://docs.docker.com/engine/security/apparmor/). This could've helped in preventing me from accessing the file system on the host _**even if I had read/write permissions on all directories and files**_.
-
+<br><br>
 
 
 Do you think that more countermeasures could've been taken to prevent what happened? Let me know in the comments below!
-
+<br>
 
 **Cheers**
