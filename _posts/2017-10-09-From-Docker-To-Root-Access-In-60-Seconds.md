@@ -139,10 +139,14 @@ Content-Type: application/json
 Connection: Close
 ```
 And we should be receiving a new connection with a root reverse shell. Hurraaay!
-![Root access to the container]({{"https://github.com/fusionx3/fusionx3.github.io/blob/master/images/docker_2.png?raw=true" | absolute_url)}})
+<img src="https://github.com/fusionx3/fusionx3.github.io/blob/master/images/docker_2.png" width="200" height="200" />
+
 
 **Don't cheer up just yet, because we're still confined in the container.**
 
 
 ## **Escalating to the host's root**
-Now, to the fun part! As
+Now, to the fun part! As mentioned above, we _mapped_ the host's root directory to a directory inside the container, which we called `hostroot`. So, by simply nagivating to this directory, we are able to view the entire filesystem of the **host**.
+`cd /root/hostroot`
+
+Another mistake
