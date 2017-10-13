@@ -1,6 +1,6 @@
 ---
 layout: post
-title: From Docker API To Root Access in 60 Seconds
+title: From Docker API To Host Root Access
 date: '2017-10-09 16:25:06 -0700'
 comments: true
 published: true
@@ -14,9 +14,18 @@ published: true
 <br>
 ## **What is Docker?**
 
-From [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software)):
+Think of Docker as the app-based virtualization technology where you get faster performance and no overhead like in a Hypervisor(OS-based). However, you get less _isolation_. Meaning, all containers share(sort of) the same host OS and could potentially affect each others. Boot time is different, because VMs need to boot a full OS. Meanwhile, a Docker container is merely an overlay and isn't as resource-independent as a Virtual Machine.
 
-> Docker is a software technology providing containers, promoted by the company Docker, Inc. Docker provides an additional layer of abstraction and automation of operating-system-level virtualization on Windows and Linux. Docker uses the resource isolation features of the Linux kernel such as cgroups and kernel namespaces, and a union-capable file system such as OverlayFS and others to allow independent "containers" to run within a single Linux instance, avoiding the overhead of starting and maintaining virtual machines (VMs).
+|         -         	|      Docker     	|       Hypervisor(VM)      |
+|:-----------------:	|:---------------:	|:---------------------:	|
+| Overhead/Hardware 	|     Minimal     	|          High         	|
+| Performance       	|       High      	|         Lower         	|
+| Boot time         	|       Fast      	|         Slower        	|
+| Isolation         	| Sharing same OS 	| Independent resources 	|
+
+You can find a detailed definition on [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software)).
+
+In order to create a Docker container, you need to build an image first. You can find images at [Docker Hub](https://hub.docker.com/) or you can build your own using a [_Dockerfile_](https://docs.docker.com/engine/reference/builder/). After building your image, it gets saved locally on the disk, then you can create a container based on this image and start it.
 
 <br>
 ## **Information Gathering**
@@ -32,7 +41,7 @@ By appending `/info` to the URL of the service to be like this: `http://10.0.5.1
 
 So, the system administrator hasn't restricted access to the Docker API (A big mistake), and apparently, since the Docker daemon runs as a privileged user, I doubt that the system administration bothered
 
-To enumerate the version of the API, we simply appended `v1.30/info` to the URL and the API explicitly told us its version:
+To enumerate the version of the API, we appended `v1.30/info` to the URL and the API explicitly told us its version. v1.30 is the latest version of the API at the time of writing this article, and according to the documentation, you can query
 
 `{"message":"client is newer than server (client API version: 1.30, server API version: 1.24)"}`
 
