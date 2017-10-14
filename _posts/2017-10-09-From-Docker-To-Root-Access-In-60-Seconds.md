@@ -72,7 +72,7 @@ After some quick reading through the [Docker API Documentation](https://docs.doc
 Since Docker allows us to create an image from a _Dockerfile_ through the UNIX socket, it shouldn't be different if performed through the API, right?
 We begin to craft our own malicious _Dockerfile_ and upload it anywhere on the internet. The Dockerfile I created utilized a clean Ubuntu installation and the good ol' netcat to give us a reverse TCP shell with root access to the container.
 
-```docker
+```dockerfile
 FROM ubuntu:16.04
 
 RUN apt-get update -y && apt-get install netcat -y
