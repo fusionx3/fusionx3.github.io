@@ -70,7 +70,7 @@ Connection: Close
 After some quick reading through the [Docker API Documentation](https://docs.docker.com/engine/api/v1.24/), creating a custom image and starting it as a container is simply a matter of a few POST requests.
 
 Since Docker allows us to create an image from a _Dockerfile_ through the UNIX socket, it shouldn't be different if performed through the API, right?
-We begin to craft our own malicious _Dockerfile_ and upload it anywhere on the internet. The Dockerfile I created utilized a clean Ubuntu installation and the good ol' netcat to give us a reverse TCP shell with root access to the container.
+We begin to craft our own malicious _Dockerfile_ and upload it anywhere on the internet. The Dockerfile I created utilized a clean Ubuntu installation and the good ol' netcat to give us a reverse TCP shell with root access to the container. Our _Dockerfile_ should look like this:
 
 ```docker
 FROM ubuntu:16.04
@@ -217,13 +217,13 @@ I'm going to list the mistakes and misconfugiration problems which led to this a
 
 	Being one of the suggested OWASP's top 10 most critical web application security risks for 2017, I can't stress enough how important it is for developers to follow standard security procedures and policies. The API could've been hardened further by doing two things:
 
-	1. Restrict access to the API by only allowing specific computers/IP address to use it.
+	1. Restrict access to the API by only allowing specific computers/IP address to use it. You can use [iptables](https://www.garron.me/en/bits/iptables-open-port-for-specific-ip.html) or [firewalld](https://major.io/2014/11/24/trust-ip-address-firewallds-rich-rules/).
 
-	2. Implement proper authorization to the API, to prevent unauthenticated attempts to abuse the API and create Docker images/containers.
+	2. Implement proper authorization to the API, to prevent unauthenticated attempts to abuse the API and create Docker images/containers. Refer to the [documentation](https://docs.docker.com/engine/api/v1.30/#section/Authentication) for further details.
  
 - **SSH Root Login**
 
-	You should never allow SSH root login, period
+	You should never allow SSH root login, period. In `/etc/ssh/sshd_config`, set `PermitRootLogin yes` to `PermitRootLogin no`.
 
 - **Insufficient OS Protection**
 
