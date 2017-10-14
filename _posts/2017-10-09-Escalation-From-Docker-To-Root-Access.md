@@ -127,7 +127,7 @@ Content-Length: 207
 }
 ```
 
-That's where the magic happens. Assuming that the user which is running the docker daemon is privileged and able to view and edit all files on the host system, we simply _map_ or _bind_ the root's directory to a directory create inside the container itself. Theoritically, we should be able to browse the **HOST**'s file system `/` from inside the container by navigating into `/root/hostroot`.
+That's where the magic happens. Assuming that the user which is running the docker daemon is privileged and able to view and edit all files on the host system, we simply _map_ or _bind_ the root's directory to a directory create inside the container itself. Theoritically, we should be able to browse the **HOST**'s file system `/` from inside the container by navigating into `/root/hostroot/`.
 
 In case of a successful container creation, the server's response will look like this:
 ```http
@@ -184,7 +184,7 @@ Now, to the fun part! As mentioned above, we _mapped_ the host's root directory 
 
 For more convenience and to avoid getting confused and accidentally browse files on the container rather than the host, we can use _chroot_ command to change the current root directory:
 
-`chroot /root/roothost`
+`chroot /root/hostroot`
 
 Another mistake made by the system administration was allowing root login via SSH to the host. How did we know this? through the `sshd_config` file of course!
 
