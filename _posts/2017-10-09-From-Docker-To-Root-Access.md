@@ -102,8 +102,7 @@ Date: Tue, 03 Oct, 2017 15:52:16 GMT
 Content-Type: application/json
 Content-Length: 90
 Connection: Close
-
-	{"Id":"89a1eeb4c9a48a4d3a7bc300fc0b6164d32f2bd65b84e15ef60954b8bb38125d","Warnings":null}
+{"Id":"89a1eeb4c9a48a4d3a7bc300fc0b6164d32f2bd65b84e15ef60954b8bb38125d","Warnings":null}
 ```
 
 We can confirm that our image has been created by going to this URL: http://10.0.5.10:4000/images/json. It should be the first one form the top.
@@ -121,7 +120,6 @@ Connection: close
 Upgrade-Insecure-Requests: 1
 Content-Type: application/json
 Content-Length: 207
-
 {
 	"Image": "sha256:00c1fade7392ddfdc9541735334cf52bc7aa938c52c03fd8ab8e60268de55625",
 	"HostConfig": {
@@ -139,7 +137,6 @@ Date: Tue, 03 Oct, 2017 15:54:16 GMT
 Content-Type: application/json
 Content-Length: 9140
 Connection: Close
-
 {"stream":"Step 1 : FROM ubuntu:16.04\n"}
 ...
 SNIP
@@ -159,8 +156,7 @@ Accept-Encoding: gzip, deflate
 Connection: close
 Upgrade-Insecure-Requests: 1
 Content-Type: application/json
-Content-Length: 4
-
+Content-Length: 2
 {}
 ```
 Make sure that you set up a netcat listener to receive the reverse TCP connection before starting the container.
