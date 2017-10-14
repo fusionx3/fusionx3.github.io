@@ -105,7 +105,7 @@ Connection: Close
 {"Id":"89a1eeb4c9a48a4d3a7bc300fc0b6164d32f2bd65b84e15ef60954b8bb38125d","Warnings":null}
 ```
 
-We can confirm that our image has been created by going to this URL: http://10.0.5.10:4000/images/json. It should be the first one form the top.
+We can confirm that our image has been created by going to this URL: `http://10.0.5.10:4000/images/json`. It should be the first one form the top.
 
 Next step is to create a container from this image, and according to the documentation, it could be done using the following request:
 
