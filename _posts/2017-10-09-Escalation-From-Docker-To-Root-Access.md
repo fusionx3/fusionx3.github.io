@@ -49,7 +49,7 @@ By appending `/info` to the URL of the service to be like this: `http://10.0.5.1
 ![Information about the Docker Daemon]({{ "https://raw.githubusercontent.com/fusionx3/fusionx3.github.io/master/images/docker_1.png" | absolute_url }})
 
 
-Docker API hasSo, the system administrator hasn't restricted access to the Docker API (A big mistake), and apparently, since the Docker daemon runs as a privileged user, I doubt that the system administration bothered
+Unfortunately, the Docker API doesn't have a built-in authentication system, but you can implement [TLS certificates](http://tech.paulcz.net/2016/01/secure-docker-with-tls/) to restrict access to the API.
 
 To enumerate the version of the API, we appended `v1.30/info` to the URL and the API explicitly told us its version. v1.30 is the latest version of the API at the time of writing this article, and according to the documentation, you can also query the server's info by submitting a GET request to this URL: `http://10.0.5.10:4000/v1.30/info`
 ```http
@@ -215,7 +215,7 @@ I'm going to list the mistakes and misconfugiration problems which led to this a
 
 	1. Restrict access to the API by only allowing specific computers/IP address to use it. You can use [iptables](https://www.garron.me/en/bits/iptables-open-port-for-specific-ip.html) or [firewalld](https://major.io/2014/11/24/trust-ip-address-firewallds-rich-rules/).
 
-	2. Implement proper authorization to the API, to prevent unauthenticated attempts to abuse the API and create Docker images/containers. Refer to the [documentation](https://docs.docker.com/engine/api/v1.30/#section/Authentication) for further details.
+	2. Implement proper authorization to the API, to prevent unauthenticated attempts to abuse the API and create Docker images/containers. Refer to this [article](http://tech.paulcz.net/2016/01/secure-docker-with-tls/) for further details.
  
 - **SSH Root Login**
 
