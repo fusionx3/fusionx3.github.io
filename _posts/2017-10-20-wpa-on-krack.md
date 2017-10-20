@@ -10,14 +10,14 @@ A couple of days ago, [Mathy Vanhoef](https://twitter.com/vanhoefm) of [imec-Dis
 
 ### **What is WPA2?**
 
-WPA2 (Wi-Fi Protected Access II) is the protocol used in the encryption of wireless network communications (Wi-Fi). It superseded the [WEP](https://en.wikipedia.org/wiki/Wired_Equivalent_Privacy) (Wired Equivalent Privacy) algorithm which proved to be [extremely weak and easily broken](https://eprint.iacr.org/2007/120.pdf).
+WPA2 (Wi-Fi Protected Access II) is the protocol used in the encryption of wireless network communications (Wi-Fi). It has superseded the [WEP](https://en.wikipedia.org/wiki/Wired_Equivalent_Privacy) (Wired Equivalent Privacy) algorithm which was proven to be [extremely weak and easily broken](https://eprint.iacr.org/2007/120.pdf).
 <br>
 
 ### **What is the Bug?**
 
-Typically, after the authentication process followed by association between the client (your computer) and the AP (Wi-Fi router), a _4-way handshake_ takes place. The result of this handshake 
+Typically, after the authentication process followed by association between the client (your computer) and the AP (Wi-Fi router), a _4-way handshake_ takes place. This handshake results in the generation and exchange of [ different keys](https://security.stackexchange.com/a/149236) that are used in the encryption process of all further traffic between the client and the AP.
+Since the radio waves are not 100% reliable, the protocol ensures that the key exchange is performed correctly by repeating the _Step 3_ the 4-way handshake. The 3rd step contains what is known by a **nonce**, _which is a random integer generated for a single purpose_, and in our case, it is used in the mathematical process of key(s) generation. Every time _Step 3_ is sent, the key is _reinstalled_.
 
-For some detailed information, check this [answer on StackExchange](https://security.stackexchange.com/a/149236).
 
 ### **The Impact of the Bug**
 
@@ -34,7 +34,21 @@ You can find a list of affected vendors at the [CERT's official website](https:/
 The author of the paper wanted to wait as long as possible before publishing the tools used in the [demonstration video](https://www.youtube.com/watch?v=Oh4WURZoR98) so vendors can have a reasonable window of time to patch their implementations of WPA2. However, one of the scripts which was used in the video got leaked. That gave the author no choice but to release the script which was partially leaked.
 The script could be found at [Mathy's Github repository](https://github.com/vanhoefm/krackattacks-test-ap-ft).
 <br>
-  
+ 
+### **Suggested Solution**
+
+Interestingly, the suggested solution was a simple _boolean_ value, which is set to true when the key is received and successfully installed, skipping any further attempts to reinstall the key by repeating the Step 3 packet. Pseudo-code:
+
+```c
+bool Step3 = false;
+temp_key = recv_key();
+if (Step3)
+  //Skip reinstalling
+else
+  //Install the key
+  key = temp_key;
+```
+
 ### **Fixes**
 As a regular user, best you can do is hope that your AP/Computer's vendor patches its own implementation of WPA2 as quick as possible. We know that [Microsoft has silently rolled a security patch last week](https://www.theverge.com/2017/10/16/16481818/wi-fi-attack-response-security-patches). However, if you're an advanced user, you can take advantage of the [manual patches](https://github.com/kristate/krackinfo).
 <br>
