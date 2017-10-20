@@ -58,7 +58,7 @@ else
 <br>
 
 ### **Fixes**
-As a regular user, best you can do is hope that your AP/Computer's vendor patches its own implementation of WPA2 as quick as possible. We know that [Microsoft has silently rolled a security patch last week](https://www.theverge.com/2017/10/16/16481818/wi-fi-attack-response-security-patches). However, if you're an advanced user, you can take advantage of the [released manual patches](https://github.com/kristate/krackinfo).
+As a regular user, best you can do is hope that your AP/Computer's vendor patches its own implementation of WPA2 as quick as possible. We know that [Microsoft has silently rolled a security patch last week](https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2017-13080). However, if you're an advanced user, you can take advantage of the [released manual patches](https://github.com/kristate/krackinfo).
 <br><br>
   
 ### **References**
@@ -68,7 +68,7 @@ As a regular user, best you can do is hope that your AP/Computer's vendor patche
 
 [Vulnerable Products and their vendors](https://www.kb.cert.org/vuls/byvendor?searchview&Query=FIELD+Reference=228519&SearchOrder=4)
 
-[Manual Patches](https://github.com/kristate/krackinfo)
+[Patching Status for different products](https://github.com/kristate/krackinfo)
 <br><br>
 
 **Tags:** `#wifi` `#krack` `#0day` `#exploit` `#hack` `#wpa2`
