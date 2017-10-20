@@ -1,5 +1,9 @@
 ---
-published: false
+layout: post
+title: '0-Day: WPA2 On Krack!'
+date: '2017-10-20 10:25:06 -0700'
+comments: true
+published: true
 ---
 A couple of days ago, [Mathy Vanhoef](https://twitter.com/vanhoefm) of [imec-DistriNet](https://distrinet.cs.kuleuven.be/) has published his scientific [paper](https://papers.mathyvanhoef.com/ccs2017.pdf) which explained how WPA2's algorithm mechanism could be manipulated so an attacker could decrypt the WPA2-encrypted traffic between an Access Point and a client.
 <p>
