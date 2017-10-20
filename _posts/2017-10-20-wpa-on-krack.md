@@ -22,6 +22,8 @@ Since the radio waves are not 100% reliable, the protocol ensures that the key e
 **Note**
 > This is not a flaw in the encryption method used in the protocol. This is simply a flaw in the implementation of the handshake process, which makes it a logic bug rather than a cryptographic one.
 
+<br>
+<img src="https://raw.githubusercontent.com/fusionx3/fusionx3.github.io/master/images/WPA2-Personal%2C%2B4-way%2Bhandshake.jpg"/>
 <br><br>
 
 ### **The Impact of the Bug**
