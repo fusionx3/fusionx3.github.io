@@ -5,6 +5,7 @@ date: '2017-10-20 10:25:06 -0700'
 comments: true
 published: true
 ---
+<title>0-Day: WPA2 On Krack! | TCPJunkie</title>
 A couple of days ago, [Mathy Vanhoef](https://twitter.com/vanhoefm) of [imec-DistriNet](https://distrinet.cs.kuleuven.be/) has published his scientific [paper](https://papers.mathyvanhoef.com/ccs2017.pdf) which explained how WPA2's algorithm mechanism could be manipulated so an attacker could decrypt the WPA2-encrypted traffic between an Access Point and a client.<!--break-->
 <br>
 
@@ -26,7 +27,7 @@ Since the radio waves are not 100% reliable, the protocol ensures that the key e
 
 ### **The Impact of the Bug**
 
-An attacker
+An attacker could take advantage of the key reinstall function to reinstall/reset the key by manipulating the value of the nonce. In case of providing a zero
 <br><br>
 
 ### **Affected Devices**
@@ -61,4 +62,7 @@ As a regular user, best you can do is hope that your AP/Computer's vendor patche
 <br>
   
 ### **References**
-www.
+Official Website
+
+
+
