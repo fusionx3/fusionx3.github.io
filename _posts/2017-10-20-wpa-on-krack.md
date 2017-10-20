@@ -7,12 +7,12 @@ published: true
 ---
 <title>0-Day: WPA2 On Krack! | TCPJunkie</title>
 A couple of days ago, [Mathy Vanhoef](https://twitter.com/vanhoefm) of [imec-DistriNet](https://distrinet.cs.kuleuven.be/) has published his scientific [paper](https://papers.mathyvanhoef.com/ccs2017.pdf) which explained how WPA2's algorithm mechanism could be manipulated so an attacker could decrypt the WPA2-encrypted traffic between an Access Point and a client.<!--break-->
-<br>
+<br><br>
 
 ### **What is WPA2?**
 
 WPA2 (Wi-Fi Protected Access II) is the protocol used in the encryption of wireless network communications (Wi-Fi). It has superseded the [WEP](https://en.wikipedia.org/wiki/Wired_Equivalent_Privacy) (Wired Equivalent Privacy) algorithm which was proven to be [extremely weak and easily broken](https://eprint.iacr.org/2007/120.pdf).
-<br>
+<br><br>
 
 ### **What is the Bug?**
 
@@ -59,10 +59,12 @@ else
 
 ### **Fixes**
 As a regular user, best you can do is hope that your AP/Computer's vendor patches its own implementation of WPA2 as quick as possible. We know that [Microsoft has silently rolled a security patch last week](https://www.theverge.com/2017/10/16/16481818/wi-fi-attack-response-security-patches). However, if you're an advanced user, you can take advantage of the [manual patches](https://github.com/kristate/krackinfo).
-<br>
+<br><br>
   
 ### **References**
-Official Website
+[KrackAttack's Official Website](https://www.krackattacks.com)
+[Vulnerable Products and their vendors](https://www.kb.cert.org/vuls/byvendor?searchview&Query=FIELD+Reference=228519&SearchOrder=4)
+[Manual Patches](https://github.com/kristate/krackinfo)
+[Proof of Concept video](https://www.youtube.com/watch?v=Oh4WURZoR98)
 
-
-
+<br><br>
