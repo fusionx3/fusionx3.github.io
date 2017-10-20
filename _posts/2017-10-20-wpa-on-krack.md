@@ -70,5 +70,5 @@ As a regular user, best you can do is hope that your AP/Computer's vendor patche
 [Manual Patches](https://github.com/kristate/krackinfo)
 <br><br>
 
-**Tags:** #wifi #krack #0day #exploit #hack #wpa2
+**Tags:** `#wifi` `#krack` `#0day` `#exploit` `hack` `wpa2`
 <br><br>
