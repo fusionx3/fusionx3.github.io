@@ -63,8 +63,11 @@ As a regular user, best you can do is hope that your AP/Computer's vendor patche
   
 ### **References**
 [KrackAttack's Official Website](https://www.krackattacks.com)
+
 [Vulnerable Products and their vendors](https://www.kb.cert.org/vuls/byvendor?searchview&Query=FIELD+Reference=228519&SearchOrder=4)
+
 [Manual Patches](https://github.com/kristate/krackinfo)
+
 [Proof of Concept video](https://www.youtube.com/watch?v=Oh4WURZoR98)
 
 <br><br>
