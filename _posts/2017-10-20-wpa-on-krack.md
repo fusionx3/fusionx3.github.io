@@ -18,7 +18,7 @@ WPA2 (Wi-Fi Protected Access II) is the protocol used in the encryption of wirel
 
 Typically, after the authentication process followed by association between the client (your computer) and the AP (Wi-Fi router), a _4-way handshake_ takes place. This handshake results in the generation and exchange of [ different keys](https://security.stackexchange.com/a/149236) that are used in the encryption process of all further traffic between the client and the AP.
 
-Since the radio waves are not 100% reliable, the protocol ensures that the key exchange is performed correctly by repeating the _Step 3_ the 4-way handshake several times. The 3rd step contains what is known by the **nonce**, _which is a random integer generated for a single purpose_, and in our case, it is used in the mathematical process of key(s) generation. Every time _Step 3_ is sent, the key is _reinstalled_.
+Since the radio waves are not 100% reliable, the protocol ensures that the key exchange is performed correctly by repeating the _Step 3_ the 4-way handshake several times. The 3rd step contains what is known by the `nonce`, _which is a random integer generated for a single purpose_, and in our case, it is used in the mathematical process of key(s) generation. Every time _Step 3_ is sent, the key is _reinstalled_.
 
 **Note**
 > This is not a flaw in the encryption method used in the protocol. This is simply a flaw in the implementation of the handshake process, which makes it a logic bug rather than a cryptographic one.
@@ -27,7 +27,7 @@ Since the radio waves are not 100% reliable, the protocol ensures that the key e
 
 ### **The Impact of the Bug**
 
-An attacker could take advantage of the key reinstall function to reinstall/reset the key by manipulating the value of the nonce. In case of providing a zero
+An attacker could take advantage of the key reinstall function to reinstall/reset the key by manipulating the value of the nonce. In case of providing a zero `nonce`, Linux and Android-based devices reset the entire key to **zero**, making the attack extremely easier. You might need to perform further cryptoattacks if you don't know the AP's password on some other Operating systems.
 <br><br>
 
 ### **Affected Devices**
@@ -43,7 +43,7 @@ The script could be found at [Mathy's Github repository](https://github.com/vanh
  
 ### **Suggested Solution**
 
-Interestingly, the suggested solution was a simple _boolean_ value, which is set to true when the key is received and successfully installed, skipping any further attempts to reinstall the key. So when the attacker repeats the Step 3 packet, it will be ignored. An example pseudo-code:
+Interestingly, the suggested solution was a simple `boolean value`, which is set to true when the key is received and successfully installed, skipping any further attempts to reinstall the key. So when the attacker repeats the Step 3 packet, it will be ignored. An example pseudo-code:
 
 ```c
 bool Step3 = false;
