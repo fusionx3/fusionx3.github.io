@@ -239,3 +239,5 @@ Do you think that more countermeasures could've been taken to prevent what happe
 **Cheers**
 <br>
 <br>
+
+**Tags:** `#docker` `#hack` `#privilege` `#escalation` `#pentest`
