@@ -54,7 +54,7 @@ else
   //Install the key
   key = temp_key;
 ```
-<br><br>
+<br>
 
 ### **Fixes**
 As a regular user, best you can do is hope that your AP/Computer's vendor patches its own implementation of WPA2 as quick as possible. We know that [Microsoft has silently rolled a security patch last week](https://www.theverge.com/2017/10/16/16481818/wi-fi-attack-response-security-patches). However, if you're an advanced user, you can take advantage of the [manual patches](https://github.com/kristate/krackinfo).
