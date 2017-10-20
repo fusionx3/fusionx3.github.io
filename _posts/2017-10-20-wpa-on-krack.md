@@ -54,7 +54,6 @@ else
   //Install the key
   key = temp_key;
 ```
-
 <br><br>
 
 ### **Fixes**
