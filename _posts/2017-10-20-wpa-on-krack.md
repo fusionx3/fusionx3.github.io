@@ -19,26 +19,26 @@ Typically, after the authentication process followed by association between the 
 
 Since the radio waves are not 100% reliable, the protocol ensures that the key exchange is performed correctly by repeating the _Step 3_ the 4-way handshake several times. The 3rd step contains what is known by the **nonce**, _which is a random integer generated for a single purpose_, and in our case, it is used in the mathematical process of key(s) generation. Every time _Step 3_ is sent, the key is _reinstalled_.
 
-Note
+**Note**
 > This is not a flaw in the encryption method used in the protocol. This is simply a flaw in the implementation of the handshake process, which makes it a logic bug rather than a cryptographic one.
-<br>
+<br><br>
 
 
 ### **The Impact of the Bug**
 
 An attacker
-<br>
+<br><br>
 
 ### **Affected Devices**
 
 You can find a list of affected devices and Operation Systems with their respective vendors at the [CERT's official website](https://www.kb.cert.org/vuls/byvendor?searchview&Query=FIELD+Reference=228519&SearchOrder=4). The list is frequently updated.
-<br>
+<br><br>
 
 ### **Proof of Concept**
 
 The author of the paper wanted to wait as long as possible before publishing the tools used in the [demonstration video](https://www.youtube.com/watch?v=Oh4WURZoR98) so vendors can have a reasonable window of time to patch their implementations of WPA2. However, one of the scripts got leaked. That gave the author no choice but to release the script which was partially leaked.
 The script could be found at [Mathy's Github repository](https://github.com/vanhoefm/krackattacks-test-ap-ft).
-<br>
+<br><br>
  
 ### **Suggested Solution**
 
@@ -53,6 +53,8 @@ else
   //Install the key
   key = temp_key;
 ```
+
+<br><br>
 
 ### **Fixes**
 As a regular user, best you can do is hope that your AP/Computer's vendor patches its own implementation of WPA2 as quick as possible. We know that [Microsoft has silently rolled a security patch last week](https://www.theverge.com/2017/10/16/16481818/wi-fi-attack-response-security-patches). However, if you're an advanced user, you can take advantage of the [manual patches](https://github.com/kristate/krackinfo).
