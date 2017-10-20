@@ -5,7 +5,6 @@ date: '2017-10-20 10:25:06 -0700'
 comments: true
 published: true
 ---
-<title>0-Day: WPA2 On Krack! | TCPJunkie</title>
 A couple of days ago, [Mathy Vanhoef](https://twitter.com/vanhoefm) of [imec-DistriNet](https://distrinet.cs.kuleuven.be/) has published his scientific [paper](https://papers.mathyvanhoef.com/ccs2017.pdf) which explained how WPA2's algorithm mechanism could be manipulated so an attacker could decrypt the WPA2-encrypted traffic between an Access Point and a client.<!--break-->
 <br><br>
 
@@ -57,7 +56,7 @@ else
 <br>
 
 ### **Fixes**
-As a regular user, best you can do is hope that your AP/Computer's vendor patches its own implementation of WPA2 as quick as possible. We know that [Microsoft has silently rolled a security patch last week](https://www.theverge.com/2017/10/16/16481818/wi-fi-attack-response-security-patches). However, if you're an advanced user, you can take advantage of the [manual patches](https://github.com/kristate/krackinfo).
+As a regular user, best you can do is hope that your AP/Computer's vendor patches its own implementation of WPA2 as quick as possible. We know that [Microsoft has silently rolled a security patch last week](https://www.theverge.com/2017/10/16/16481818/wi-fi-attack-response-security-patches). However, if you're an advanced user, you can take advantage of the [released manual patches](https://github.com/kristate/krackinfo).
 <br><br>
   
 ### **References**
@@ -70,5 +69,5 @@ As a regular user, best you can do is hope that your AP/Computer's vendor patche
 [Manual Patches](https://github.com/kristate/krackinfo)
 <br><br>
 
-**Tags:** `#wifi` `#krack` `#0day` `#exploit` `hack` `wpa2`
+**Tags:** `#wifi` `#krack` `#0day` `#exploit` `#hack` `#wpa2`
 <br><br>
