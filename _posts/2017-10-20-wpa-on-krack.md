@@ -27,7 +27,7 @@ Since the radio waves are not 100% reliable, the protocol ensures that the key e
 
 ### **The Impact of the Bug**
 
-An attacker could take advantage of the key reinstall function to reinstall/reset the key by manipulating the value of the nonce. In case of providing a zero `nonce`, Linux and Android-based devices reset the entire key to **zero**, making the attack extremely easier. You might need to perform further cryptoattacks if you don't know the AP's password on some other Operating systems.
+An attacker could take advantage of the key reinstalling function to reinstall/reset the key by manipulating the value of the nonce. In case of providing a zero `nonce`, Linux and Android-based devices reset the entire key to **zero**, making the attack extremely easier. However, you might need to perform further cryptoattacks if you don't know the AP's password on other different Operating Systems/devices.
 <br><br>
 
 ### **Affected Devices**
@@ -63,10 +63,12 @@ As a regular user, best you can do is hope that your AP/Computer's vendor patche
 ### **References**
 [KrackAttack's Official Website](https://www.krackattacks.com)
 
+[Proof of Concept video](https://www.youtube.com/watch?v=Oh4WURZoR98)
+
 [Vulnerable Products and their vendors](https://www.kb.cert.org/vuls/byvendor?searchview&Query=FIELD+Reference=228519&SearchOrder=4)
 
 [Manual Patches](https://github.com/kristate/krackinfo)
+<br><br>
 
-[Proof of Concept video](https://www.youtube.com/watch?v=Oh4WURZoR98)
-
+**Tags:** #wifi #krack #0day #exploit #hack
 <br><br>
