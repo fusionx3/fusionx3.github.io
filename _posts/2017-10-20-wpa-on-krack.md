@@ -22,8 +22,8 @@ Since the radio waves are not 100% reliable, the protocol ensures that the key e
 
 **Note**
 > This is not a flaw in the encryption method used in the protocol. This is simply a flaw in the implementation of the handshake process, which makes it a logic bug rather than a cryptographic one.
-<br><br>
 
+<br><br>
 
 ### **The Impact of the Bug**
 
@@ -70,5 +70,5 @@ As a regular user, best you can do is hope that your AP/Computer's vendor patche
 [Manual Patches](https://github.com/kristate/krackinfo)
 <br><br>
 
-**Tags:** #wifi #krack #0day #exploit #hack
+**Tags:** #wifi #krack #0day #exploit #hack #wpa2
 <br><br>
